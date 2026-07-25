@@ -1,19 +1,29 @@
 {
   "name": "cursor-leader",
+  "author": "lumine-code",
   "description": "Keyboard-driven multi-cursor creation and navigation commands",
-  "repository": "https://github.com/asiloisad/pulsar-cursor-leader",
+  "repository": "https://github.com/lumine-code/cursor-leader",
+  "bugs": {
+    "url": "https://github.com/lumine-code/cursor-leader/issues"
+  },
   "keywords": [
     "cursor",
     "selection",
     "single",
     "multi"
   ],
-  "version": "4.1.2",
+  "version": "5.0.0",
   "license": "MIT",
   "engines": {
     "atom": ">=1.132.0 <2.0.0"
   },
   "main": "./lib/main",
+  "scripts": {
+    "test": "cd ../lumine && npm run test:only -- ../cursor-leader/spec",
+    "lint": "eslint . --max-warnings 0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
   "consumedServices": {
     "status-bar": {
       "versions": {
@@ -23,19 +33,25 @@
   },
   "configSchema": {
     "cursorDecoration": {
-      "order": 1,
       "title": "Decoration of the last cursor",
       "description": "The main cursor is marked with special CSS when the number of cursors is more than two.",
       "type": "boolean",
       "default": true
     },
     "decorationTime": {
-      "order": 2,
       "title": "Time to disappear cursor decoration",
       "description": "Set the time in ms after which decoration disappears. If the timer is set to zero, the decoration is permanent.",
       "type": "integer",
       "minimum": 0,
       "default": 2000
     }
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.8.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-n": "^18.2.2",
+    "globals": "^17.7.0",
+    "prettier": "^3.9.6"
   }
 }

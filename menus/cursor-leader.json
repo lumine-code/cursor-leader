@@ -1,0 +1,18 @@
+{
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "Cursor Leader",
+          "submenu": [
+            { "label": "Power Global", "command": "cursor-leader:power-global" },
+            { "label": "Toggle", "command": "cursor-leader:toggle" },
+            { "label": "Previous", "command": "cursor-leader:previous" },
+            { "label": "Next", "command": "cursor-leader:next" }
+          ]
+        }
+      ]
+    }
+  ]
+}

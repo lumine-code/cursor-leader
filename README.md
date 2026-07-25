@@ -2,34 +2,34 @@
 
 Keyboard-driven multi-cursor creation and navigation commands.
 
-![demo](https://github.com/asiloisad/pulsar-cursor-leader/blob/master/assets/demo.gif?raw=true)
-
 ## Features
 
-- **Cursor creation**: Toggle new cursors anywhere.
-- **Cursor navigation**: Switch between cursors.
-- **Active cursor highlight**: Visual indicator when multiple cursors exist.
-- **Single cursor movement**: Individual cursor movement and selection commands.
-- **Power mode**: Temporarily isolate active cursor for all operations.
-- **Cursor consolidation**: Merge all cursors to the active cursor position.
-- **Overtype compatibility**: Works with [overtype-mode](https://github.com/asiloisad/pulsar-overtype-mode).
-- **Column selection compatibility**: Works with [column-selection](https://github.com/asiloisad/pulsar-column-selection), including in power mode.
+- **Cursor creation**: toggle new cursors anywhere.
+- **Cursor navigation**: switch between cursors.
+- **Active cursor highlight**: visual indicator when multiple cursors exist.
+- **Single cursor movement**: individual cursor movement and selection commands.
+- **Power mode**: temporarily isolate active cursor for all operations.
+- **Cursor consolidation**: merge all cursors to the active cursor position.
+- **Overtype compatibility**: works with overtype cursor styling.
 
 ## Installation
 
-To install `cursor-leader` search for [cursor-leader](https://web.pulsar-edit.dev/packages/cursor-leader) in the Install pane of the Pulsar settings or run `ppm install cursor-leader`. Alternatively, you can run `ppm install asiloisad/pulsar-cursor-leader` to install a package directly from the GitHub repository.
+To install `cursor-leader` search for _cursor-leader_ in the Install pane of the Lumine settings or run `lumine --install lumine-code/cursor-leader`.
 
 ## Commands
 
+Commands available in `atom-workspace`:
+
+- `cursor-leader:power-global`: toggle power mode for all editors.
+
 Commands available in `atom-text-editor`:
 
-- `cursor-leader:power-global`: toggle power mode for all editors,
 - `cursor-leader:power-editor`: toggle power mode for the active editor,
 - `cursor-leader:toggle`: toggle cursor instance,
-- `cursor-leader:previous`: activate next cursor,
-- `cursor-leader:next`: activate previous cursor,
-- `cursor-leader:reset`,
-- `cursor-leader:remove`,
+- `cursor-leader:previous`: activate previous cursor,
+- `cursor-leader:next`: activate next cursor,
+- `cursor-leader:reset`: activate the last cursor,
+- `cursor-leader:remove`: remove the active cursor,
 - `cursor-leader:move-up`,
 - `cursor-leader:move-down`,
 - `cursor-leader:move-left`,
@@ -77,13 +77,13 @@ Commands available in `atom-text-editor`:
 - `cursor-leader:toggle-line-comments`,
 - `cursor-leader:indent-selected-rows`.
 
-## Power mode
+## Usage
 
 Power mode isolates all editor operations to the active cursor only. When enabled, built-in commands (typing, deletion, indentation, etc.) as well as `cursor-leader` move and select commands affect only the active cursor, leaving all other cursors untouched.
 
 There are two scopes:
 
-- **Global** (`cursor-leader:power-global`): enables power mode for all open editors and any editor opened afterward. The ⚡ status bar icon reflects this state and clicking it toggles global power mode.
+- **Global** (`cursor-leader:power-global`): enables power mode for all open editors and any editor opened afterward. The status bar icon reflects this state and clicking it toggles global power mode.
 - **Editor** (`cursor-leader:power-editor`): toggles power mode for the active editor only, independently of the global state.
 
 Use cases:
@@ -93,15 +93,17 @@ Use cases:
 
 ## Customization
 
-The style can be adjusted according to user preferences in the `styles.less` file:
-
-- e.g. change active cursor highlight color:
+The active cursor highlight can be adjusted in your `styles.less` file, e.g. change its color:
 
 ```less
 atom-text-editor .cursors .cursor.cursor-leader-highlight {
-  border-left-color: @text-color-warning;
+  border-left-color: var(--text-color-warning);
 }
 ```
+
+## Services
+
+- **status-bar** (`^1.0.0`): consumed to display the power mode indicator tile on the right side of the status bar.
 
 ## Contributing
 

@@ -1,0 +1,24 @@
+.status-bar .cursor-leader-status {
+  cursor: default;
+
+  & .icon::before {
+    margin-right: 0;
+  }
+
+  & .power {
+    color: var(--text-color-success);
+  }
+}
+
+atom-text-editor .cursors .cursor.cursor-leader-highlight {
+  border-left-color: var(--text-color-error);
+}
+
+atom-text-editor.overtype-cursor .cursors .cursor.cursor-leader-highlight {
+  border: 1px solid var(--text-color-error);
+  background-color: color-mix(in srgb, var(--text-color-error) 20%, transparent);
+}
+
+atom-text-editor.overtype-cursor .cursors.blink-off .cursor.cursor-leader-highlight {
+  border: none;
+}
