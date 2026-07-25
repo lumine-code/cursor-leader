@@ -7,10 +7,11 @@
     "url": "https://github.com/lumine-code/cursor-leader/issues"
   },
   "keywords": [
-    "cursor",
+    "multi-cursor",
+    "multicursor",
     "selection",
-    "single",
-    "multi"
+    "navigation",
+    "power-mode"
   ],
   "version": "1.0.0",
   "license": "MIT",
