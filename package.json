@@ -1,7 +1,7 @@
 {
   "name": "cursor-leader",
   "author": "lumine-code",
-  "description": "Keyboard-driven multi-cursor creation and navigation commands",
+  "description": "Keyboard-driven multi-cursor creation and navigation commands.",
   "repository": "https://github.com/lumine-code/cursor-leader",
   "bugs": {
     "url": "https://github.com/lumine-code/cursor-leader/issues"
