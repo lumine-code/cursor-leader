@@ -103,7 +103,7 @@ atom-text-editor .cursors .cursor.cursor-leader-highlight {
 
 ## Services
 
-- **status-bar** (`^1.0.0`): consumed to display the power mode indicator tile on the right side of the status bar.
+- **[status-bar](https://lumine-code.github.io/docs.html#services/status-bar)** (`^1.0.0`): consumed to display the power mode indicator tile on the right side of the status bar.
 
 ## Contributing
 
