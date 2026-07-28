@@ -18,6 +18,10 @@
   "engines": {
     "atom": ">=1.132.0 <2.0.0"
   },
+  "backgroundTips": [
+    "You can isolate the active cursor from all the others with {{ 'cursor-leader:power-editor' | keystroke }}",
+    "You can step between your cursors with {{ 'cursor-leader:next' | keystroke }}"
+  ],
   "main": "./lib/main",
   "scripts": {
     "test": "lumine --test spec",
