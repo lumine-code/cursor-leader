@@ -94,14 +94,29 @@ describe("cursor-leader", () => {
       expect(positions.length).toBe(1);
       expect(positions[0].isEqual([0, 0])).toBe(true);
     });
+  });
 
-    it("consolidates all cursors to the active cursor", () => {
+  describe("consolidating selections", () => {
+    it("leaves the most recent cursor, whichever one is active", () => {
       placeCursors([0, 1, 2]);
       dispatch("cursor-leader:previous");
-      editor.consolidateSelections();
+      dispatch("editor:consolidate-selections");
       const positions = editor.getCursorBufferPositions();
       expect(positions.length).toBe(1);
-      expect(positions[0].isEqual([1, 0])).toBe(true);
+      expect(positions[0].isEqual([2, 0])).toBe(true);
+    });
+
+    it("leaves power mode so the editor sees every cursor again", () => {
+      placeCursors([0, 1, 2]);
+      dispatch("cursor-leader:power-editor");
+      expect(editor.cursorPower).toBe(true);
+
+      dispatch("editor:consolidate-selections");
+      expect(editor.cursorPower).toBe(false);
+      expect(editorElement.classList.contains("cursor-leader")).toBe(false);
+      const positions = editor.getCursorBufferPositions();
+      expect(positions.length).toBe(1);
+      expect(positions[0].isEqual([2, 0])).toBe(true);
     });
   });
 

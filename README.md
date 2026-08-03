@@ -9,7 +9,6 @@ Keyboard-driven multi-cursor creation and navigation commands.
 - **Active cursor highlight**: visual indicator when multiple cursors exist.
 - **Single cursor movement**: individual cursor movement and selection commands.
 - **Power mode**: temporarily isolate active cursor for all operations.
-- **Cursor consolidation**: merge all cursors to the active cursor position.
 - **Overtype compatibility**: works with overtype cursor styling.
 
 ## Installation
@@ -85,6 +84,8 @@ There are two scopes:
 
 - **Global** (`cursor-leader:power-global`): enables power mode for all open editors and any editor opened afterward. The status bar icon reflects this state and clicking it toggles global power mode.
 - **Editor** (`cursor-leader:power-editor`): toggles power mode for the active editor only, independently of the global state.
+
+Consolidating the selections of an editor also leaves its power mode, so the editor collapses to a single cursor instead of holding on to the ones power mode hid from it.
 
 Use cases:
 
