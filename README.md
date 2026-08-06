@@ -94,9 +94,9 @@ Use cases:
 
 ## Customization
 
-The active cursor highlight can be adjusted in your `styles.less` file, e.g. change its color:
+The active cursor highlight can be adjusted in your `styles.css` file, e.g. change its color:
 
-```less
+```css
 atom-text-editor .cursors .cursor.cursor-leader-highlight {
   border-left-color: var(--text-color-warning);
 }
