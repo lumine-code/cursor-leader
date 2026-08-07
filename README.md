@@ -19,14 +19,14 @@ To install `cursor-leader` search for _cursor-leader_ in the Install pane of the
 
 Commands available in `atom-workspace`:
 
-- `cursor-leader:power-global`: toggle power mode for all editors.
+- `cursor-leader:power-global`: toggle power mode for all editors,
+- `cursor-leader:toggle`: toggle cursor instance,
+- `cursor-leader:previous`: activate previous cursor,
+- `cursor-leader:next`: activate next cursor.
 
 Commands available in `atom-text-editor`:
 
 - `cursor-leader:power-editor`: toggle power mode for the active editor,
-- `cursor-leader:toggle`: toggle cursor instance,
-- `cursor-leader:previous`: activate previous cursor,
-- `cursor-leader:next`: activate next cursor,
 - `cursor-leader:reset`: activate the last cursor,
 - `cursor-leader:remove`: remove the active cursor,
 - `cursor-leader:move-up`,
