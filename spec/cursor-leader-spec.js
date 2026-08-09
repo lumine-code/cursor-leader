@@ -2,16 +2,16 @@ describe("cursor-leader", () => {
   let workspaceElement, editor, editorElement;
 
   beforeEach(async () => {
-    workspaceElement = atom.views.getView(atom.workspace);
+    workspaceElement = lumine.views.getView(lumine.workspace);
     jasmine.attachToDOM(workspaceElement);
-    await atom.packages.activatePackage("cursor-leader");
-    editor = await atom.workspace.open();
-    editorElement = atom.views.getView(editor);
+    await lumine.packages.activatePackage("cursor-leader");
+    editor = await lumine.workspace.open();
+    editorElement = lumine.views.getView(editor);
     editor.setText("aaa\nbbb\nccc\nddd\n");
   });
 
   function dispatch(command) {
-    atom.commands.dispatch(editorElement, command);
+    lumine.commands.dispatch(editorElement, command);
   }
 
   function placeCursors(rows) {
@@ -41,14 +41,14 @@ describe("cursor-leader", () => {
     });
 
     it("toggles power mode globally for all editors", async () => {
-      const other = await atom.workspace.open();
-      const otherElement = atom.views.getView(other);
+      const other = await lumine.workspace.open();
+      const otherElement = lumine.views.getView(other);
 
-      atom.commands.dispatch(workspaceElement, "cursor-leader:power-global");
+      lumine.commands.dispatch(workspaceElement, "cursor-leader:power-global");
       expect(editorElement.classList.contains("cursor-leader")).toBe(true);
       expect(otherElement.classList.contains("cursor-leader")).toBe(true);
 
-      atom.commands.dispatch(workspaceElement, "cursor-leader:power-global");
+      lumine.commands.dispatch(workspaceElement, "cursor-leader:power-global");
       expect(editorElement.classList.contains("cursor-leader")).toBe(false);
       expect(otherElement.classList.contains("cursor-leader")).toBe(false);
     });
@@ -140,7 +140,7 @@ describe("cursor-leader", () => {
     });
 
     it("does not decorate when the setting is disabled", () => {
-      atom.config.set("cursor-leader.cursorDecoration", false);
+      lumine.config.set("cursor-leader.cursorDecoration", false);
       placeCursors([0, 1]);
       expect(getHighlights().length).toBe(0);
     });
@@ -150,7 +150,7 @@ describe("cursor-leader", () => {
     let tile;
 
     beforeEach(async () => {
-      await atom.packages.activatePackage("status-bar");
+      await lumine.packages.activatePackage("status-bar");
       tile = workspaceElement.querySelector(".cursor-leader-status");
     });
 

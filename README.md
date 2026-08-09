@@ -17,14 +17,14 @@ To install `cursor-leader` search for _cursor-leader_ in the Install pane of the
 
 ## Commands
 
-Commands available in `atom-workspace`:
+Commands available in `lumine-workspace`:
 
 - `cursor-leader:power-global`: toggle power mode for all editors,
 - `cursor-leader:toggle`: toggle cursor instance,
 - `cursor-leader:previous`: activate previous cursor,
 - `cursor-leader:next`: activate next cursor.
 
-Commands available in `atom-text-editor`:
+Commands available in `lumine-text-editor`:
 
 - `cursor-leader:power-editor`: toggle power mode for the active editor,
 - `cursor-leader:reset`: activate the last cursor,
@@ -97,7 +97,7 @@ Use cases:
 The active cursor highlight can be adjusted in your `styles.css` file, e.g. change its color:
 
 ```css
-atom-text-editor .cursors .cursor.cursor-leader-highlight {
+lumine-text-editor .cursors .cursor.cursor-leader-highlight {
   border-left-color: var(--text-color-warning);
 }
 ```
