@@ -13,7 +13,7 @@ Keyboard-driven multi-cursor creation and navigation commands.
 
 ## Installation
 
-To install `cursor-leader` search for _cursor-leader_ in the Install pane of the Lumine settings or run `lumine --install lumine-code/cursor-leader`.
+To install `cursor-leader` search for it in the Install pane of the Lumine settings, or run the command `lumine --install lumine-code/cursor-leader`.
 
 ## Commands
 
@@ -82,8 +82,8 @@ Power mode isolates all editor operations to the active cursor only. When enable
 
 There are two scopes:
 
-- **Global** (`cursor-leader:power-global`): enables power mode for all open editors and any editor opened afterward. The status bar icon reflects this state and clicking it toggles global power mode.
-- **Editor** (`cursor-leader:power-editor`): toggles power mode for the active editor only, independently of the global state.
+- `Global` (`cursor-leader:power-global`): enables power mode for all open editors and any editor opened afterward. The status bar icon reflects this state and clicking it toggles global power mode.
+- `Editor` (`cursor-leader:power-editor`): toggles power mode for the active editor only, independently of the global state.
 
 Consolidating the selections of an editor also leaves its power mode, so the editor collapses to a single cursor instead of holding on to the ones power mode hid from it.
 
@@ -104,7 +104,7 @@ lumine-text-editor .cursors .cursor.cursor-leader-highlight {
 
 ## Services
 
-- **status-bar** (`^1.0.0`): consumed to display the power mode indicator tile on the right side of the status bar.
+- `status-bar`: consumed to display the power mode indicator tile on the right side of the status bar.
 
 ## Contributing
 
