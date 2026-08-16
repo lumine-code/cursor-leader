@@ -4,7 +4,7 @@
   },
   // :not([mini]) because these move cursors in the file, and reached from a
   // mini editor they would move them in the file behind the dialog.
-  "lumine-text-editor:not([mini])": {
+  "lumine-workspace lumine-text-editor:not([mini])": {
     "cmdorctrl-shift-alt-insert": "cursor-leader:power-editor",
     "cmdorctrl-alt-pageup": "cursor-leader:previous",
     "cmdorctrl-alt-pagedown": "cursor-leader:next",
