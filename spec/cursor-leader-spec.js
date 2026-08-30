@@ -52,6 +52,20 @@ describe("cursor-leader", () => {
       expect(editorElement.classList.contains("cursor-leader")).toBe(false);
       expect(otherElement.classList.contains("cursor-leader")).toBe(false);
     });
+
+    it("includes an editor hosted in a detached surface", async () => {
+      lumine.initializeDetachedPaneSurfaces({ force: true });
+      const detachedPane = await lumine.workspace.detachPaneItem(editor, { show: false });
+
+      try {
+        lumine.commands.dispatch(workspaceElement, "cursor-leader:power-global");
+        expect(editorElement.ownerDocument).not.toBe(document);
+        expect(editorElement.classList).toContain("cursor-leader");
+      } finally {
+        if (detachedPane.isDetached()) await lumine.workspace.attachDetachedPane(detachedPane);
+        lumine.initializeDetachedPaneSurfaces();
+      }
+    });
   });
 
   describe("cursor navigation", () => {
