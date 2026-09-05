@@ -2,9 +2,9 @@
   "lumine-workspace": {
     "cmdorctrl-alt-insert": "cursor-leader:power-global"
   },
-  // :not([mini]) because these move cursors in the file, and reached from a
-  // mini editor they would move them in the file behind the dialog.
-  "lumine-workspace lumine-text-editor:not([mini])": {
+  // Deliberately includes mini editors: these commands act on whichever editor
+  // owns the keystroke, including a picker or dialog query.
+  "lumine-text-editor": {
     "cmdorctrl-shift-alt-insert": "cursor-leader:power-editor",
     "cmdorctrl-alt-pageup": "cursor-leader:previous",
     "cmdorctrl-alt-pagedown": "cursor-leader:next",

@@ -218,6 +218,42 @@ describe("cursor-leader", () => {
       expect(positions.length).toBe(1);
       expect(positions[0].isEqual([2, 0])).toBe(true);
     });
+
+    it("acts on a select-list mini editor when no document editor is active", async () => {
+      const host = lumine.workspace.addSelectList({
+        items: ["one", "two"],
+        renderItem: (item) => ({ primary: item }),
+      });
+      const list = host.getModel();
+      const miniEditor = list.getQueryEditor();
+      const miniElement = miniEditor.getElement();
+      const nonEditorItem = document.createElement("div");
+
+      try {
+        host.show();
+        miniEditor.setText("abcd");
+        miniEditor.setCursorBufferPosition([0, 0]);
+        miniEditor.addCursorAtBufferPosition([0, 2]);
+        lumine.workspace.getActivePane().activateItem(nonEditorItem);
+
+        expect(lumine.workspace.getActiveTextEditor()).toBeUndefined();
+        expect(lumine.workspace.getTextEditorForElement(miniElement)).toBe(miniEditor);
+
+        lumine.commands.dispatch(miniElement, "cursor-leader:move-right");
+        expect(miniEditor.getCursorBufferPositions()).toEqual([
+          [0, 0],
+          [0, 3],
+        ]);
+
+        expect(() =>
+          lumine.commands.dispatch(miniElement, "editor:consolidate-selections"),
+        ).not.toThrow();
+        expect(miniEditor.getCursorBufferPositions()).toEqual([[0, 3]]);
+      } finally {
+        await host.destroy();
+        lumine.workspace.getActivePane().activateItem(editor);
+      }
+    });
   });
 
   describe("cursor decoration", () => {
