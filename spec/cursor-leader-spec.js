@@ -1,10 +1,23 @@
 describe("cursor-leader", () => {
-  let workspaceElement, editor, editorElement;
+  const patchedProperties = [
+    "cursorIndex",
+    "cursorPower",
+    "cursorDecoration",
+    "getSuperCursor",
+    "getCursors",
+    "getLastCursor",
+    "getSuperSelection",
+    "getSelections",
+    "getLastSelection",
+    "cursorHighlight",
+  ];
+  let workspaceElement, editor, editorElement, mainModule;
 
   beforeEach(async () => {
     workspaceElement = lumine.views.getView(lumine.workspace);
     jasmine.attachToDOM(workspaceElement);
-    await lumine.packages.activatePackage("cursor-leader");
+    const pack = await lumine.packages.activatePackage("cursor-leader");
+    mainModule = pack.mainModule;
     editor = await lumine.workspace.open();
     editorElement = lumine.views.getView(editor);
     editor.setText("aaa\nbbb\nccc\nddd\n");
@@ -21,11 +34,98 @@ describe("cursor-leader", () => {
     }
   }
 
+  function highlightsFor(targetEditor) {
+    return targetEditor
+      .getDecorations({ type: "cursor" })
+      .filter((decoration) => decoration.getProperties().class === "cursor-leader-highlight");
+  }
+
+  function ownDescriptorsFor(targetEditor) {
+    return new Map(
+      patchedProperties.map((property) => [
+        property,
+        Object.getOwnPropertyDescriptor(targetEditor, property),
+      ]),
+    );
+  }
+
+  function expectOwnDescriptors(targetEditor, descriptors) {
+    for (const [property, descriptor] of descriptors) {
+      expect(Object.getOwnPropertyDescriptor(targetEditor, property)).toEqual(descriptor);
+    }
+  }
+
   it("patches observed editors with leader helpers", () => {
     expect(typeof editor.getSuperCursor).toBe("function");
     expect(typeof editor.getSuperSelection).toBe("function");
     expect(editor.cursorIndex).toBe(0);
     expect(editor.cursorPower).toBe(false);
+  });
+
+  it("unpatches after the last registration and watches a re-added editor only once", () => {
+    const detached = lumine.workspace.buildTextEditor();
+    const originalDescriptors = ownDescriptorsFor(detached);
+    let firstRegistration;
+    let secondRegistration;
+    let reRegistration;
+
+    try {
+      firstRegistration = lumine.textEditors.add(detached, { role: "fragment" });
+      const patchedGetCursors = detached.getCursors;
+      secondRegistration = lumine.textEditors.add(detached, { role: "fragment" });
+
+      expect(detached.getCursors).toBe(patchedGetCursors);
+      firstRegistration.dispose();
+      expect(detached.getCursors).toBe(patchedGetCursors);
+
+      secondRegistration.dispose();
+      expectOwnDescriptors(detached, originalDescriptors);
+
+      reRegistration = lumine.textEditors.add(detached, { role: "fragment" });
+      const highlight = spyOn(detached, "cursorHighlight").and.callThrough();
+      detached.setText("one\ntwo");
+      detached.setCursorBufferPosition([0, 0]);
+      detached.addCursorAtBufferPosition([1, 0]);
+
+      expect(highlight).toHaveBeenCalledTimes(1);
+      expect(highlightsFor(detached)).toHaveLength(1);
+
+      reRegistration.dispose();
+      expectOwnDescriptors(detached, originalDescriptors);
+      expect(highlightsFor(detached)).toHaveLength(0);
+      expect(() => detached.addCursorAtBufferPosition([0, 1])).not.toThrow();
+    } finally {
+      firstRegistration?.dispose();
+      secondRegistration?.dispose();
+      reRegistration?.dispose();
+      detached.destroy();
+    }
+  });
+
+  it("restores registered and unregistered editors when deactivated", async () => {
+    const detached = lumine.workspace.buildTextEditor();
+    const detachedDescriptors = ownDescriptorsFor(detached);
+    mainModule.update(detached);
+    detached.setText("one\ntwo");
+    detached.addCursorAtBufferPosition([1, 0]);
+
+    placeCursors([0, 1]);
+    dispatch("cursor-leader:power-editor");
+    expect(editorElement.classList.contains("cursor-leader")).toBe(true);
+    expect(highlightsFor(editor)).toHaveLength(1);
+    expect(highlightsFor(detached)).toHaveLength(1);
+
+    await lumine.packages.deactivatePackage("cursor-leader");
+
+    expectOwnDescriptors(detached, detachedDescriptors);
+    for (const property of patchedProperties) {
+      expect(Object.prototype.hasOwnProperty.call(editor, property)).toBe(false);
+    }
+    expect(editorElement.classList.contains("cursor-leader")).toBe(false);
+    expect(highlightsFor(editor)).toHaveLength(0);
+    expect(highlightsFor(detached)).toHaveLength(0);
+    expect(() => detached.addCursorAtBufferPosition([0, 1])).not.toThrow();
+    detached.destroy();
   });
 
   describe("power mode", () => {
@@ -121,28 +221,22 @@ describe("cursor-leader", () => {
   });
 
   describe("cursor decoration", () => {
-    function getHighlights() {
-      return editor
-        .getDecorations({ type: "cursor" })
-        .filter((decoration) => decoration.getProperties().class === "cursor-leader-highlight");
-    }
-
     it("decorates the active cursor when multiple cursors exist", () => {
       placeCursors([0, 1]);
-      expect(getHighlights().length).toBe(1);
+      expect(highlightsFor(editor).length).toBe(1);
     });
 
     it("removes the decoration after the configured time", () => {
       placeCursors([0, 1]);
-      expect(getHighlights().length).toBe(1);
+      expect(highlightsFor(editor).length).toBe(1);
       advanceClock(2001);
-      expect(getHighlights().length).toBe(0);
+      expect(highlightsFor(editor).length).toBe(0);
     });
 
     it("does not decorate when the setting is disabled", () => {
       lumine.config.set("cursor-leader.cursorDecoration", false);
       placeCursors([0, 1]);
-      expect(getHighlights().length).toBe(0);
+      expect(highlightsFor(editor).length).toBe(0);
     });
   });
 
