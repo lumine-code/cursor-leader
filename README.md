@@ -9,6 +9,7 @@ Keyboard-driven multi-cursor creation and navigation commands.
 - **Active cursor highlight**: visual indicator when multiple cursors exist.
 - **Single cursor movement**: individual cursor movement and selection commands.
 - **Power mode**: temporarily isolate active cursor for all operations.
+- **Mini editors**: apply the same leader controls to picker and dialog inputs.
 - **Overtype compatibility**: works with overtype cursor styling.
 
 ## Installation
@@ -79,6 +80,8 @@ Commands available in `lumine-text-editor`:
 ## Usage
 
 Power mode isolates all editor operations to the active cursor only. When enabled, built-in commands (typing, deletion, indentation, etc.) as well as `cursor-leader` move and select commands affect only the active cursor, leaving all other cursors untouched.
+
+Editor-scoped commands follow the editor that owns the keystroke, including mini editors used by pickers and dialogs.
 
 There are two scopes:
 
