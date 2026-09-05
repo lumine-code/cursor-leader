@@ -245,10 +245,11 @@ describe("cursor-leader", () => {
           [0, 3],
         ]);
 
-        expect(() =>
-          lumine.commands.dispatch(miniElement, "editor:consolidate-selections"),
-        ).not.toThrow();
+        miniElement.dispatchEvent(
+          new KeyboardEvent("keydown", { key: "Escape", bubbles: true, cancelable: true }),
+        );
         expect(miniEditor.getCursorBufferPositions()).toEqual([[0, 3]]);
+        expect(host.isVisible()).toBe(true);
       } finally {
         await host.destroy();
         lumine.workspace.getActivePane().activateItem(editor);
