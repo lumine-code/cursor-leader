@@ -82,6 +82,7 @@ describe("cursor-leader", () => {
       expectOwnDescriptors(detached, originalDescriptors);
 
       reRegistration = lumine.textEditors.add(detached, { role: "fragment" });
+      const highlightDescriptor = Object.getOwnPropertyDescriptor(detached, "cursorHighlight");
       const highlight = spyOn(detached, "cursorHighlight").and.callThrough();
       detached.setText("one\ntwo");
       detached.setCursorBufferPosition([0, 0]);
@@ -90,6 +91,9 @@ describe("cursor-leader", () => {
       expect(highlight).toHaveBeenCalledTimes(1);
       expect(highlightsFor(detached)).toHaveLength(1);
 
+      // Restore the package-owned method before checking its restoration;
+      // teardown must preserve a different function installed by another owner.
+      Object.defineProperty(detached, "cursorHighlight", highlightDescriptor);
       reRegistration.dispose();
       expectOwnDescriptors(detached, originalDescriptors);
       expect(highlightsFor(detached)).toHaveLength(0);

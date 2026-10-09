@@ -49,7 +49,7 @@
   "configSchema": {
     "cursorDecoration": {
       "title": "Decoration of the last cursor",
-      "description": "The main cursor is marked with special CSS when the number of cursors is more than two.",
+      "description": "The leader cursor is highlighted when there is more than one cursor.",
       "type": "boolean",
       "default": true
     },
