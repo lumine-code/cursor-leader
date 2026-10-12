@@ -1,3 +1,4 @@
+const windowService = require("./helpers/window-service");
 describe("Cursor Leader editor patch ownership", () => {
   let main, editor, cleanups, bar;
   beforeEach(async () => {
@@ -45,7 +46,7 @@ describe("Cursor Leader editor patch ownership", () => {
     const StatusBarView =
       lumine.packages.getActivePackage("status-bar").mainModule.statusBar.constructor;
     bar = new StatusBarView();
-    const lease = main.consumeStatusBar(bar);
+    const lease = main.consumeStatusBar(windowService(bar));
     cleanups.push(() => lease.dispose());
     const tile = bar
       .getRightTiles()
@@ -54,7 +55,7 @@ describe("Cursor Leader editor patch ownership", () => {
     spyOn(tile, "destroy").and.callFake(() => {
       main.activate();
       main.powerGlobal();
-      const currentLease = main.consumeStatusBar(bar);
+      const currentLease = main.consumeStatusBar(windowService(bar));
       cleanups.push(() => currentLease.dispose());
       destroy();
     });
@@ -84,6 +85,7 @@ describe("Cursor Leader editor patch ownership", () => {
     main = (await lumine.packages.activatePackage("cursor-leader")).mainModule;
     editor.addCursorAtBufferPosition([0, 2]);
     const item = {
+      canCopy: () => false,
       getTitle: () => "Owned non-text surface",
       element: document.createElement("div"),
     };

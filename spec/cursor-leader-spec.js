@@ -232,6 +232,7 @@ describe("cursor-leader", () => {
       const miniEditor = list.getQueryEditor();
       const miniElement = miniEditor.getElement();
       const nonEditorItem = document.createElement("div");
+      nonEditorItem.canCopy = () => false;
 
       try {
         host.show();
