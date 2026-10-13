@@ -9,7 +9,7 @@ Keyboard-driven multi-cursor creation and navigation commands.
 - **Active cursor highlight**: visual indicator when multiple cursors exist.
 - **Single cursor movement**: individual cursor movement and selection commands.
 - **Power mode**: temporarily isolate active cursor for all operations.
-- **Status control**: switch power mode for all editors or the current editor from the icon's context menu, which lists the mouse shortcuts; the tooltip shows the global state and primary click action.
+- **Status control**: switch power mode for all editors or the current editor from the icon's context menu; the tooltip shows the global state and primary action.
 - **Mini editors**: apply the same leader controls to picker and dialog inputs.
 - **Overtype compatibility**: works with overtype cursor styling.
 
@@ -88,6 +88,8 @@ There are two scopes:
 
 - `Global` (`cursor-leader:power-global`): enables power mode for all open editors and any editor opened afterward. The status bar icon reflects this state and clicking it toggles global power mode.
 - `Editor` (`cursor-leader:power-editor`): toggles power mode for the active editor only, independently of the global state.
+
+Left-click the status bar icon to toggle global power mode, or Shift+left-click it to toggle power mode for the current editor. Right-click opens a menu with both actions.
 
 Consolidating the selections of an editor also leaves its power mode, so the editor collapses to a single cursor instead of holding on to the ones power mode hid from it.
 
