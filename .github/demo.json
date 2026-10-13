@@ -1,0 +1,17 @@
+{
+  "title": "cursor-leader",
+  "description": "Control one cursor independently while retaining the other editing positions.",
+  "recordedOn": "2026-10-13",
+  "sourceRevision": "dadf16aaf8df1673553bb1ac5480fcc56decbe71",
+  "mode": "normal",
+  "fontSettings": "default",
+  "themeSourceRevision": "6564a9e21899b5541e9c8f8006f9be6d6d72e6ad",
+  "images": [
+    {
+      "file": "demo.png",
+      "label": "Control one cursor independently while retaining the other editing positions.",
+      "width": 1100,
+      "height": 730
+    }
+  ]
+}

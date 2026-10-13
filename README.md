@@ -13,6 +13,8 @@ Keyboard-driven multi-cursor creation and navigation commands.
 - **Mini editors**: apply the same leader controls to picker and dialog inputs.
 - **Overtype compatibility**: works with overtype cursor styling.
 
+![Control one cursor independently while retaining the other editing positions.](.github/demo.png)
+
 ## Installation
 
 To install `cursor-leader` search for it in the Install pane of the Lumine settings, or run the command `lumine --install lumine-code/cursor-leader`.
