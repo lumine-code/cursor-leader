@@ -21,7 +21,8 @@ describe("cursor-leader status actions", () => {
     ]);
     expect(menu().map((item) => item.mouseBindingLabel)).toEqual(["LMB", "Shift+LMB"]);
     const [tooltip] = lumine.tooltips.findTooltips(element);
-    expect(tooltip.options.keyBindingCommand).toBeUndefined();
+    expect(tooltip.options.keyBindingCommand).toBe("cursor-leader:power-global");
+    expect(tooltip.options.keyBindingExtra).toBeUndefined();
     expect(tooltip.getTitle()).toContain("Click to toggle.");
     element.dispatchEvent(new MouseEvent("click", { button: 2 }));
     expect(main.global).toBe(false);
