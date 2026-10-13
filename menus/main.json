@@ -1,6 +1,37 @@
 {
   "menu": [
     {
+      "label": "View",
+      "submenu": [
+        {
+          "label": "Editor",
+          "submenu": [
+            {
+              "label": "Cursor Leader",
+              "command": "cursor-leader:power-global"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Selection",
+      "submenu": [
+        {
+          "label": "Toggle Cursor at Leader",
+          "command": "cursor-leader:toggle"
+        },
+        {
+          "label": "Previous Leader Cursor",
+          "command": "cursor-leader:previous"
+        },
+        {
+          "label": "Next Leader Cursor",
+          "command": "cursor-leader:next"
+        }
+      ]
+    },
+    {
       "label": "Packages",
       "submenu": [
         {
