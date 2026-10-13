@@ -4,7 +4,9 @@ describe("cursor-leader status actions", () => {
     require("node:path").join(lumine.application.getResourcePath(), "package.json"),
   );
   const { humanizeKeystroke } = coreRequire("@lumine-code/underscore-plus");
-  const modifier = process.platform === "darwin" ? "cmd" : "ctrl";
+  const globalStroke = process.platform === "darwin" ? "alt-cmd-insert" : "ctrl-alt-insert";
+  const editorStroke =
+    process.platform === "darwin" ? "alt-shift-cmd-insert" : "ctrl-alt-shift-insert";
   let main, resources, editor, window;
   const menu = () => lumine.contextMenu.templateForElement(resources.widget);
   beforeEach(async () => {
@@ -64,12 +66,12 @@ describe("cursor-leader status actions", () => {
 
   it("shows the editor shortcut without changing the global shortcut", async () => {
     expect(menu().map((item) => item.keyBindingLabel)).toEqual([
-      humanizeKeystroke(`${modifier}-alt-insert`),
-      humanizeKeystroke(`${modifier}-alt-shift-insert`),
+      humanizeKeystroke(globalStroke),
+      humanizeKeystroke(editorStroke),
     ]);
     await lumine.workspace.getActivePane().destroyItem(editor, true);
     expect(menu().map((item) => item.keyBindingLabel)).toEqual([
-      humanizeKeystroke(`${modifier}-alt-insert`),
+      humanizeKeystroke(globalStroke),
       "",
     ]);
   });
@@ -89,7 +91,7 @@ describe("cursor-leader status actions", () => {
       expect(fragment.cursorPower).toBe(true);
       expect(editor.cursorPower).toBe(false);
       expect(menu()[1].checked).toBe(true);
-      expect(menu()[1].keyBindingLabel).toBe(humanizeKeystroke(`${modifier}-alt-shift-insert`));
+      expect(menu()[1].keyBindingLabel).toBe(humanizeKeystroke(editorStroke));
       item.getActiveEmbeddedTextEditor = () => undefined;
       expect(menu()[1].enabled).toBe(false);
       expect(menu()[1].keyBindingLabel).toBe("");
