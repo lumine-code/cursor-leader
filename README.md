@@ -9,7 +9,7 @@ Keyboard-driven multi-cursor creation and navigation commands.
 - **Active cursor highlight**: visual indicator when multiple cursors exist.
 - **Single cursor movement**: individual cursor movement and selection commands.
 - **Power mode**: temporarily isolate active cursor for all operations.
-- **Status control**: switch power mode for all editors or the current editor from the icon's context menu; left-click changes all editors, and Shift-click changes the current editor.
+- **Status control**: switch power mode for all editors or the current editor from the icon's context menu, which lists the mouse shortcuts; the tooltip shows the global state and primary click action.
 - **Mini editors**: apply the same leader controls to picker and dialog inputs.
 - **Overtype compatibility**: works with overtype cursor styling.
 
