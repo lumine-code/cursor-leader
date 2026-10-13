@@ -8,7 +8,9 @@
           "submenu": [
             {
               "label": "Cursor Leader",
-              "command": "cursor-leader:power-global"
+              "command": "cursor-leader:power-global",
+              "group": "structure",
+              "order": 40
             }
           ]
         }
@@ -19,15 +21,21 @@
       "submenu": [
         {
           "label": "Toggle Cursor at Leader",
-          "command": "cursor-leader:toggle"
+          "command": "cursor-leader:toggle",
+          "group": "leaders",
+          "order": 10
         },
         {
           "label": "Previous Leader Cursor",
-          "command": "cursor-leader:previous"
+          "command": "cursor-leader:previous",
+          "group": "leaders",
+          "order": 20
         },
         {
           "label": "Next Leader Cursor",
-          "command": "cursor-leader:next"
+          "command": "cursor-leader:next",
+          "group": "leaders",
+          "order": 30
         }
       ]
     },
