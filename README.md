@@ -9,6 +9,7 @@ Keyboard-driven multi-cursor creation and navigation commands.
 - **Active cursor highlight**: visual indicator when multiple cursors exist.
 - **Single cursor movement**: individual cursor movement and selection commands.
 - **Power mode**: temporarily isolate active cursor for all operations.
+- **Status control**: switch power mode for all editors or the current editor from the icon's context menu; left-click changes all editors, and Shift-click changes the current editor.
 - **Mini editors**: apply the same leader controls to picker and dialog inputs.
 - **Overtype compatibility**: works with overtype cursor styling.
 
@@ -21,13 +22,13 @@ To install `cursor-leader` search for it in the Install pane of the Lumine setti
 Commands available in `lumine-workspace`:
 
 - `cursor-leader:power-global`: toggle power mode for all editors,
+- `cursor-leader:power-editor`: toggle power mode for the current editor,
 - `cursor-leader:toggle`: toggle cursor instance,
 - `cursor-leader:previous`: activate previous cursor,
 - `cursor-leader:next`: activate next cursor.
 
 Commands available in `lumine-text-editor`:
 
-- `cursor-leader:power-editor`: toggle power mode for the active editor,
 - `cursor-leader:reset`: activate the last cursor,
 - `cursor-leader:remove`: remove the active cursor,
 - `cursor-leader:move-up`,
