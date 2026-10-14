@@ -20,22 +20,23 @@
       "label": "Selection",
       "submenu": [
         {
-          "label": "Toggle Cursor at Leader",
-          "command": "cursor-leader:toggle",
+          "label": "Cursor Leader",
+          "submenu": [
+            {
+              "label": "Toggle Cursor at Leader",
+              "command": "cursor-leader:toggle"
+            },
+            {
+              "label": "Previous Leader Cursor",
+              "command": "cursor-leader:previous"
+            },
+            {
+              "label": "Next Leader Cursor",
+              "command": "cursor-leader:next"
+            }
+          ],
           "group": "leaders",
           "order": 10
-        },
-        {
-          "label": "Previous Leader Cursor",
-          "command": "cursor-leader:previous",
-          "group": "leaders",
-          "order": 20
-        },
-        {
-          "label": "Next Leader Cursor",
-          "command": "cursor-leader:next",
-          "group": "leaders",
-          "order": 30
         }
       ]
     },
@@ -45,10 +46,22 @@
         {
           "label": "Cursor Leader",
           "submenu": [
-            { "label": "Power Global", "command": "cursor-leader:power-global" },
-            { "label": "Toggle", "command": "cursor-leader:toggle" },
-            { "label": "Previous", "command": "cursor-leader:previous" },
-            { "label": "Next", "command": "cursor-leader:next" }
+            {
+              "label": "Power Global",
+              "command": "cursor-leader:power-global"
+            },
+            {
+              "label": "Toggle",
+              "command": "cursor-leader:toggle"
+            },
+            {
+              "label": "Previous",
+              "command": "cursor-leader:previous"
+            },
+            {
+              "label": "Next",
+              "command": "cursor-leader:next"
+            }
           ]
         }
       ]
