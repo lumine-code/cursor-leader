@@ -4,9 +4,9 @@ describe("cursor-leader status actions", () => {
     require("node:path").join(lumine.application.getResourcePath(), "package.json"),
   );
   const { humanizeKeystroke } = coreRequire("@lumine-code/underscore-plus");
-  const globalStroke = process.platform === "darwin" ? "alt-cmd-insert" : "ctrl-alt-insert";
-  const editorStroke =
-    process.platform === "darwin" ? "alt-shift-cmd-insert" : "ctrl-alt-shift-insert";
+  const primary = process.platform === "darwin" ? "cmd" : "ctrl";
+  const globalStroke = `${primary}-k c g`;
+  const editorStroke = `${primary}-k c e`;
   let main, resources, editor, window;
   const menu = () => lumine.contextMenu.templateForElement(resources.widget);
   beforeEach(async () => {
