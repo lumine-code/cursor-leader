@@ -14,6 +14,7 @@ describe("cursor-leader status actions", () => {
     jasmine.attachToDOM(window.getElement());
     main = (await lumine.packages.activatePackage("cursor-leader")).mainModule;
     editor = await lumine.workspace.open();
+    editor.getElement().focus();
     resources = main.createStatusBarResources({ addRightTile: () => ({ destroy() {} }) }, window);
     window.getElement().appendChild(resources.widget);
   });
@@ -72,11 +73,26 @@ describe("cursor-leader status actions", () => {
     await lumine.workspace.getActivePane().destroyItem(editor, true);
     expect(menu().map((item) => item.keyBindingLabel)).toEqual([
       humanizeKeystroke(globalStroke),
-      "",
+      undefined,
     ]);
   });
 
-  it("uses the active embedded editor and disables the local action without one", async () => {
+  it("does not borrow the active editor's shortcut while another surface has focus", () => {
+    const button = document.createElement("button");
+    window.getElement().appendChild(button);
+    try {
+      button.focus();
+      expect(lumine.workspace.getActiveTextEditor()).toBe(editor);
+      expect(menu().map((item) => item.keyBindingLabel)).toEqual([
+        humanizeKeystroke(globalStroke),
+        undefined,
+      ]);
+    } finally {
+      button.remove();
+    }
+  });
+
+  it("uses a focused embedded editor's shortcut and disables the local action without one", async () => {
     const fragment = lumine.workspace.buildTextEditor();
     const registration = lumine.textEditors.add(fragment, { role: "fragment" });
     const item = {
@@ -86,15 +102,18 @@ describe("cursor-leader status actions", () => {
     };
     const pane = lumine.workspace.getActivePane();
     try {
+      item.element.appendChild(fragment.getElement());
       pane.activateItem(item);
+      fragment.getElement().focus();
       lumine.commands.dispatch(resources.widget, "cursor-leader:power-editor");
       expect(fragment.cursorPower).toBe(true);
       expect(editor.cursorPower).toBe(false);
       expect(menu()[1].checked).toBe(true);
       expect(menu()[1].keyBindingLabel).toBe(humanizeKeystroke(editorStroke));
       item.getActiveEmbeddedTextEditor = () => undefined;
+      window.getElement().focus();
       expect(menu()[1].enabled).toBe(false);
-      expect(menu()[1].keyBindingLabel).toBe("");
+      expect(menu()[1].keyBindingLabel).toBeUndefined();
       lumine.commands.dispatch(resources.widget, "cursor-leader:power-editor");
       expect(editor.cursorPower).toBe(false);
     } finally {
