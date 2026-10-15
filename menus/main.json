@@ -7,7 +7,7 @@
           "label": "Editor",
           "submenu": [
             {
-              "label": "Cursor Leader",
+              "label": "Toggle Cursor Leader in All Editors",
               "command": "cursor-leader:power-global",
               "group": "structure",
               "order": 40
@@ -47,20 +47,20 @@
           "label": "Cursor Leader",
           "submenu": [
             {
-              "label": "Power Global",
-              "command": "cursor-leader:power-global"
-            },
-            {
-              "label": "Toggle",
+              "label": "Toggle Cursor at Leader",
               "command": "cursor-leader:toggle"
             },
             {
-              "label": "Previous",
+              "label": "Previous Leader Cursor",
               "command": "cursor-leader:previous"
             },
             {
-              "label": "Next",
+              "label": "Next Leader Cursor",
               "command": "cursor-leader:next"
+            },
+            {
+              "label": "Toggle Cursor Leader in All Editors",
+              "command": "cursor-leader:power-global"
             }
           ]
         }
