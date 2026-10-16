@@ -92,6 +92,24 @@ describe("cursor-leader status actions", () => {
     }
   });
 
+  it("reads the local checkbox from the same focused mini editor that receives the command", () => {
+    const mini = lumine.workspace.buildTextEditor({ mini: true });
+    const registration = lumine.textEditors.add(mini, { role: "input" });
+    window.getElement().appendChild(mini.getElement());
+    try {
+      lumine.commands.dispatch(mini.getElement(), "cursor-leader:power-editor");
+      mini.getElement().focus();
+      expect(mini.cursorPower).toBe(true);
+      expect(editor.cursorPower).toBe(false);
+      const item = menu()[1];
+      expect(item.enabled).toBe(true);
+      expect(item.checked).toBe(true);
+    } finally {
+      registration.dispose();
+      mini.destroy();
+    }
+  });
+
   it("uses a focused embedded editor's shortcut and disables the local action without one", async () => {
     const fragment = lumine.workspace.buildTextEditor();
     const registration = lumine.textEditors.add(fragment, { role: "fragment" });
