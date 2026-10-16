@@ -75,7 +75,10 @@ Commands available in `lumine-text-editor`:
 - `cursor-leader:select-to-beginning-of-previous-paragraph`,
 - `cursor-leader:select-word`,
 - `cursor-leader:expand-over-word`,
-- `cursor-leader:expand-over-line`,
+- `cursor-leader:expand-over-line`.
+
+Commands available in `lumine-text-editor:not([readonly])`:
+
 - `cursor-leader:outdent-selected-rows`,
 - `cursor-leader:toggle-line-comments`,
 - `cursor-leader:indent-selected-rows`.
