@@ -86,6 +86,8 @@ Power mode isolates all editor operations to the active cursor only. When enable
 
 Editor-scoped commands follow the editor that owns the keystroke, including mini editors used by pickers and dialogs.
 
+Indentation and comment commands require a writable editor; cursor movement and selection remain available in readonly editors.
+
 There are two scopes:
 
 - `Global` (`cursor-leader:power-global`): enables power mode for all open editors and any editor opened afterward. The status bar icon reflects this state and clicking it toggles global power mode.
