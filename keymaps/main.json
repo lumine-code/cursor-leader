@@ -1,17 +1,16 @@
 {
   "lumine-workspace": {
-    "cmdorctrl-k c g": "cursor-leader:power-global"
+    "cmdorctrl-alt-insert": "cursor-leader:power-global"
   },
   // Deliberately includes mini editors: these commands act on whichever editor
   // owns the keystroke, including a picker or dialog query.
   "lumine-text-editor": {
-    "cmdorctrl-k c e": "cursor-leader:power-editor",
-    "cmdorctrl-k c pageup": "cursor-leader:previous",
-    "cmdorctrl-k c pagedown": "cursor-leader:next",
-    "cmdorctrl-k c enter": "cursor-leader:toggle",
-    "cmdorctrl-k c up": "cursor-leader:move-up",
-    "cmdorctrl-k c down": "cursor-leader:move-down",
-    "cmdorctrl-k c left": "cursor-leader:move-left",
-    "cmdorctrl-k c right": "cursor-leader:move-right"
+    "cmdorctrl-alt-enter": "cursor-leader:toggle",
+    "cmdorctrl-alt-pageup": "cursor-leader:previous",
+    "cmdorctrl-alt-pagedown": "cursor-leader:next",
+    "cmdorctrl-alt-up": "cursor-leader:move-up",
+    "cmdorctrl-alt-down": "cursor-leader:move-down",
+    "cmdorctrl-alt-left": "cursor-leader:move-left",
+    "cmdorctrl-alt-right": "cursor-leader:move-right"
   }
 }

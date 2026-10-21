@@ -160,16 +160,24 @@ describe("cursor-leader", () => {
 
   describe("cursor navigation", () => {
     it("switches the active cursor with previous, next and reset", () => {
+      const press = (key) =>
+        lumine.keymaps.handleKeyboardEvent(
+          lumine.keymaps.constructor.buildKeydownEvent(key, {
+            ctrl: true,
+            alt: true,
+            target: editorElement,
+          }),
+        );
       placeCursors([0, 1, 2]);
       expect(editor.getSuperCursor().getBufferPosition().row).toBe(2);
 
-      dispatch("cursor-leader:previous");
+      press("pageup");
       expect(editor.getSuperCursor().getBufferPosition().row).toBe(1);
 
-      dispatch("cursor-leader:previous");
+      press("pageup");
       expect(editor.getSuperCursor().getBufferPosition().row).toBe(0);
 
-      dispatch("cursor-leader:next");
+      press("pagedown");
       expect(editor.getSuperCursor().getBufferPosition().row).toBe(1);
 
       dispatch("cursor-leader:reset");
