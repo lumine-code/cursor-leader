@@ -5,20 +5,30 @@ describe("cursor-leader status actions", () => {
   );
   const { humanizeKeystroke } = coreRequire("@lumine-code/underscore-plus");
   const primary = process.platform === "darwin" ? "cmd" : "ctrl";
-  const globalStroke = `${primary}-k c g`;
+  const globalStroke = `${primary}-alt-insert`;
   const editorStroke = `${primary}-k c e`;
-  let main, resources, editor, window;
+  let main, resources, editor, window, bindings;
   const menu = () => lumine.contextMenu.templateForElement(resources.widget);
   beforeEach(async () => {
     window = lumine.workspace.getMainWindow();
     jasmine.attachToDOM(window.getElement());
     main = (await lumine.packages.activatePackage("cursor-leader")).mainModule;
+    // Focus resolution must also work for a user-bound local command; the
+    // shipped keymap deliberately leaves power-editor unbound.
+    bindings = lumine.keymaps.add(
+      "cursor-leader-status-actions-spec",
+      {
+        "lumine-text-editor": { [editorStroke]: "cursor-leader:power-editor" },
+      },
+      { priority: 1000 },
+    );
     editor = await lumine.workspace.open();
     editor.getElement().focus();
     resources = main.createStatusBarResources({ addRightTile: () => ({ destroy() {} }) }, window);
     window.getElement().appendChild(resources.widget);
   });
   afterEach(async () => {
+    bindings.dispose();
     main.destroyStatusBarConnection(resources);
     await lumine.packages.deactivatePackage("cursor-leader");
   });
