@@ -6,12 +6,14 @@
   // owns the keystroke, including a picker or dialog query.
   "lumine-text-editor": {
     "cmdorctrl-k c e": "cursor-leader:power-editor",
-    "cmdorctrl-k c pageup": "cursor-leader:previous",
-    "cmdorctrl-k c pagedown": "cursor-leader:next",
-    "cmdorctrl-k c enter": "cursor-leader:toggle",
+    "ctrl-alt-pageup": "cursor-leader:previous",
+    "ctrl-alt-pagedown": "cursor-leader:next",
     "cmdorctrl-k c up": "cursor-leader:move-up",
     "cmdorctrl-k c down": "cursor-leader:move-down",
     "cmdorctrl-k c left": "cursor-leader:move-left",
     "cmdorctrl-k c right": "cursor-leader:move-right"
+  },
+  "lumine-text-editor:not([mini])": {
+    "ctrl-alt-enter": "cursor-leader:toggle"
   }
 }
