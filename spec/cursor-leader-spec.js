@@ -163,7 +163,7 @@ describe("cursor-leader", () => {
       const press = (key) =>
         lumine.keymaps.handleKeyboardEvent(
           lumine.keymaps.constructor.buildKeydownEvent(key, {
-            ctrl: true,
+            [process.platform === "darwin" ? "cmd" : "ctrl"]: true,
             alt: true,
             target: editorElement,
           }),
