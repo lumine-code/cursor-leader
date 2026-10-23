@@ -5,7 +5,7 @@ describe("cursor-leader status actions", () => {
   );
   const { humanizeKeystroke } = coreRequire("@lumine-code/underscore-plus");
   const primary = process.platform === "darwin" ? "cmd" : "ctrl";
-  const globalStroke = `${primary}-alt-insert`;
+  const globalStroke = "alt-shift-insert";
   const editorStroke = `${primary}-k c e`;
   let main, resources, editor, window, bindings;
   const menu = () => lumine.contextMenu.templateForElement(resources.widget);

@@ -1,11 +1,11 @@
 {
   "lumine-workspace": {
-    "cmdorctrl-alt-insert": "cursor-leader:power-global"
+    "alt-shift-insert": "cursor-leader:power-global"
   },
   // Deliberately includes mini editors: these commands act on whichever editor
   // owns the keystroke, including a picker or dialog query.
   "lumine-text-editor": {
-    "cmdorctrl-alt-enter": "cursor-leader:toggle",
+    "cmdorctrl-alt-insert": "cursor-leader:toggle",
     "cmdorctrl-alt-pageup": "cursor-leader:previous",
     "cmdorctrl-alt-pagedown": "cursor-leader:next",
     "cmdorctrl-alt-up": "cursor-leader:move-up",
